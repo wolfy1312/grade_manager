@@ -7,6 +7,11 @@ Created on Sat Sep 26 18:02:34 2026
 # Student Grade Manager
 # A simple console program to track students and their scores
 
+# list for holding all students
+# Each student stored as a dictionary: {"name": ..., "score", ...}
+
+students = [] # an empty list, container that can hold multiple items
+
 def show_menu(): # Defines a function, a named reusable block of code ready to be called later
     # Displays the list of options to the user
     print("\n--- Student Grade Manager ---")
@@ -14,6 +19,26 @@ def show_menu(): # Defines a function, a named reusable block of code ready to b
     print("2. View all students")
     print("3. Exit")
     
+def add_student():
+    # Asks user for name and score, then stores it in students list
+    name = input("Enter student name:")
+    score = float(input("Enter student score:"))
+    
+    # Dictionary groups related data together under labeled "keys"
+    # Stores labeled data
+    student = {"name": name, "score": score}
+    students.append(student) # append() adds this student to the end of the list
+    
+    print(name, "has been added.")
+
+def view_students():
+    # Prints every student currectly stored in the list
+    if len(students) == 0:
+        print("No students added yet.")
+    else:
+        for student in students:
+            print(student["name"], "-", student["score"])
+            
 # Main program loop
 running = True
 
@@ -22,9 +47,9 @@ while running:
     choice = input("Choose an option (1-3):")
     
     if choice == "1":
-        print("Add student - coming soon")
+        add_student()
     elif choice == "2":
-        print("View students - coming soon")
+        view_students()
     elif choice == "3":
         print("Goodbye!")
         running = False
