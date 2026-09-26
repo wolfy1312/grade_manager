@@ -17,7 +17,8 @@ def show_menu(): # Defines a function, a named reusable block of code ready to b
     print("\n--- Student Grade Manager ---")
     print("1. Add a student")
     print("2. View all students")
-    print("3. Exit")
+    print("3. Show class average")
+    print("4. Exit")
     
 def add_student():
     # Asks user for name and score, then stores it in students list
@@ -37,7 +38,21 @@ def view_students():
         print("No students added yet.")
     else:
         for student in students:
-            print(student["name"], "-", student["score"])
+            if student["score"] >= 50:
+                status = "Pass"
+            else:
+                status = "Fail"
+            print(student["name"], "-", student["score"], status)
+
+def show_average(): # Calculates the average score 
+    if len(students) == 0:
+        print("No students to average")
+    else:
+        total = 0
+        for student in students:
+            total = total + student["score"]
+        average = total / len(students)
+        print("Class average:", round(average,2))
             
 # Main program loop
 running = True
@@ -51,6 +66,8 @@ while running:
     elif choice == "2":
         view_students()
     elif choice == "3":
+        show_average()
+    elif  choice == "4":
         print("Goodbye!")
         running = False
     else:
